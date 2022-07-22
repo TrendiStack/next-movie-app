@@ -1,6 +1,5 @@
-import { data } from 'autoprefixer';
 import Head from 'next/head';
-import { useState } from 'react';
+import Navbar from '../components/Navbar';
 import Recommended from '../components/Recommended';
 import SearchBar from '../components/SearchBar';
 import Trending from '../components/Trending';
@@ -14,6 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
+        <Navbar />
         <SearchBar />
         <Trending />
         <Recommended />

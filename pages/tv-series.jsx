@@ -3,6 +3,7 @@ import request from '../MovieRequest';
 import axios from 'axios';
 import MovieSmall from '../components/MovieSmall';
 import SearchBar from '../components/SearchBar';
+import Navbar from '../components/Navbar';
 
 const Tvseries = () => {
   const [movies, setMovies] = useState([]);
@@ -13,6 +14,7 @@ const Tvseries = () => {
   }, []);
   return (
     <div>
+      <Navbar />
       <SearchBar />
       <div className="max-w-[450px] mx-auto">
         <h1 className="text-3xl my-7">TV Series </h1>

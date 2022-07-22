@@ -1,14 +1,15 @@
 import '../styles/globals.css';
 import { ThemeProvider } from 'next-themes';
-import Navbar from '../components/Navbar';
+import { AuthContextProvider } from '../context/AuthContext';
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <ThemeProvider>
-        <Navbar />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <AuthContextProvider>
+        <ThemeProvider>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </AuthContextProvider>
     </>
   );
 }
