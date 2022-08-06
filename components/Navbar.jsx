@@ -1,8 +1,9 @@
 // UTILS
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Link from 'next/link';
-import { UserAuth } from '../context/AuthContext';
 import { useRouter } from 'next/router';
+import { UserContext } from '../context/user.context';
+import { signOutUser } from '../firebase';
 // REACT ICONS
 import { MdMovie } from 'react-icons/md';
 import { AiFillAppstore } from 'react-icons/ai';
@@ -11,9 +12,9 @@ import { FaBookmark } from 'react-icons/fa';
 import { HiOutlineLogout } from 'react-icons/hi';
 
 const Navbar = () => {
-  const { user, logOut } = UserAuth();
   const [active, setActive] = useState('');
   const [dropdown, setDropdown] = useState(false);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   const navigate = useRouter();
   const styles = {
     active: 'text-white',
@@ -23,63 +24,75 @@ const Navbar = () => {
   };
   const handleLogOut = async () => {
     try {
-      await logOut();
       navigate.push('/login');
+      await signOutUser();
+      setCurrentUser(prev => (prev = null));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
-  console.log(user);
+  // handleLogOut();
+
   return (
     <div className="bg-[#161D2F]">
       <div className="flex items-center w-full max-w-[450px] mx-auto  py-2">
         <Link href="/">
-          <MdMovie
-            className="text-[#FC4747] cursor-pointer"
-            size={50}
-            onClick={() => setActive(prev => (prev = 'home'))}
-          />
+          <div>
+            <MdMovie
+              className="text-[#FC4747] cursor-pointer"
+              size={50}
+              onClick={() => setActive(prev => (prev = 'home'))}
+            />
+          </div>
         </Link>
         <ul className="flex w-full justify-center gap-4 text-lg text-[#5A698F]">
           <li className="cursor-pointer">
             <Link href="/">
-              <AiFillAppstore
-                onClick={() => setActive(prev => (prev = 'home'))}
-                className={active === 'home' ? styles.active : ''}
-              />
+              <div>
+                <AiFillAppstore
+                  onClick={() => setActive(prev => (prev = 'home'))}
+                  className={active === 'home' ? styles.active : ''}
+                />
+              </div>
             </Link>
           </li>
           <li className="cursor-pointer">
             <Link href="/movies">
-              <RiFilmFill
-                onClick={() => setActive(prev => (prev = 'movie'))}
-                className={active === 'movie' ? styles.active : ''}
-              />
+              <div>
+                <RiFilmFill
+                  onClick={() => setActive(prev => (prev = 'movie'))}
+                  className={active === 'movie' ? styles.active : ''}
+                />
+              </div>
             </Link>
           </li>
           <li className="cursor-pointer">
             <Link href="/tv-series">
-              <RiTvFill
-                onClick={() => setActive(prev => (prev = 'series'))}
-                className={active === 'series' ? styles.active : ''}
-              />
+              <div>
+                <RiTvFill
+                  onClick={() => setActive(prev => (prev = 'series'))}
+                  className={active === 'series' ? styles.active : ''}
+                />
+              </div>
             </Link>
           </li>
           <li className="cursor-pointer">
             <Link href="/bookmarks">
-              <FaBookmark
-                onClick={() => setActive(prev => (prev = 'bookmarks'))}
-                className={active === 'bookmarks' ? styles.active : ''}
-              />
+              <div>
+                <FaBookmark
+                  onClick={() => setActive(prev => (prev = 'bookmarks'))}
+                  className={active === 'bookmarks' ? styles.active : ''}
+                />
+              </div>
             </Link>
           </li>
         </ul>
         <div>
-          {user?.email ? (
+          {currentUser ? (
             <picture onClick={toggleDropDown}>
               <img
                 className="w-[34px] h-[30px] rounded-full border-2  border-white"
-                src="https://media-exp1.licdn.com/dms/image/C4E03AQGmY00ghzrOlQ/profile-displayphoto-shrink_200_200/0/1647464256334?e=1658966400&v=beta&t=jqkz5ZjFVZJyk-IkIdUKBo2fls5dFBKDamtHmyjEcXU"
+                src={currentUser.photoURL}
                 alt="/"
               />
             </picture>

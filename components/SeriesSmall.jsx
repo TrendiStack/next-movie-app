@@ -1,31 +1,30 @@
 import { useState, useEffect, useContext } from 'react';
 import Image from 'next/dist/client/image';
-import axios from 'axios';
 import { RiFilmFill } from 'react-icons/ri';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { UserContext } from '../context/user.context';
-import { updateMoviesDoc } from '../firebase';
-import { SavedContext } from '../context/saved.context';
+import { updateSeriesDoc } from '../firebase';
 
-const MovieSmall = ({ movie }) => {
+const SeriesSmall = ({ show }) => {
+  const [seriesGenres, setSeriesGenres] = useState([]);
   const { currentUser } = useContext(UserContext);
   const [like, setLike] = useState(false);
-  const { movieGenres } = useContext(SavedContext);
 
-  const saveMovie = async () => {
+  const saveShow = async () => {
     if (currentUser) {
       setLike(prev => !prev);
-      await updateMoviesDoc(
+
+      await updateSeriesDoc(
         currentUser.uid,
-        movie.id,
-        movie.title,
-        movie.backdrop_path,
-        movie.release_date,
-        movie.genre_ids,
-        'Movie'
+        show.id,
+        show.name,
+        show.backdrop_path,
+        show.first_air_date,
+        show.genre_ids,
+        'Series'
       );
     } else {
-      alert('Please log in to bookmark movies');
+      alert('Please log in to bookmark shows');
     }
   };
 
@@ -34,13 +33,13 @@ const MovieSmall = ({ movie }) => {
       <div className="inline-block cursor-pointer relative">
         <Image
           className="w-full h-auto block rounded-lg"
-          src={`https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`}
+          src={`https://image.tmdb.org/t/p/w500${show?.backdrop_path}`}
           alt="/"
           width={265}
           height={165}
         />
         <div
-          onClick={saveMovie}
+          onClick={saveShow}
           className="flex justify-center items-center absolute top-2 right-2 bg-[#10141E] bg-opacity-[0.5] w-[32px] h-[32px] rounded-full"
         >
           {like ? <BsBookmarkFill /> : <BsBookmark />}
@@ -48,16 +47,16 @@ const MovieSmall = ({ movie }) => {
       </div>
       <div>
         <p className="text-md flex items-center gap-x-1">
-          {movie?.release_date.substring(0, 4)} •
+          {show?.first_air_date?.substring(0, 4)} •
           <span>
             <RiFilmFill />
           </span>
-          Movie • {movieGenres[0]?.[movie.genre_ids[0]]}
+          Series • {seriesGenres[0]?.[show.genre_ids[0]]}
         </p>
-        <p className=" text-xl">{movie?.title}</p>
+        <p className=" text-xl">{show?.name}</p>
       </div>
     </div>
   );
 };
 
-export default MovieSmall;
+export default SeriesSmall;

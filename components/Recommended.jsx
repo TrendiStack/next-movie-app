@@ -15,7 +15,7 @@ const Recommended = () => {
       <h1 className="text-3xl my-7">Recommended for you</h1>
       <div className="grid grid-cols-2 gap-x-5">
         {movies.map((movie, id) => (
-          <MovieSmall key={id} movie={movie} test={true} />
+          <MovieSmall key={id} movie={movie} />
         ))}
       </div>
     </div>

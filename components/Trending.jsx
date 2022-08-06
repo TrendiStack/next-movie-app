@@ -3,7 +3,7 @@ import request from '../MovieRequest';
 import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper';
-import Movie from './MovieLarge';
+import MovieLarge from './MovieLarge';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -26,7 +26,7 @@ const Trending = () => {
       >
         {movies.map((movie, id) => (
           <SwiperSlide key={id}>
-            <Movie movie={movie} id={id} />
+            <MovieLarge movie={movie} id={id} />
           </SwiperSlide>
         ))}
       </Swiper>

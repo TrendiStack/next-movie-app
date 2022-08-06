@@ -1,15 +1,18 @@
 import '../styles/globals.css';
 import { ThemeProvider } from 'next-themes';
-import { AuthContextProvider } from '../context/AuthContext';
+import { UserProvider } from '../context/user.context';
+import { SavedProvider } from '../context/saved.context';
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <AuthContextProvider>
-        <ThemeProvider>
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </AuthContextProvider>
+      <UserProvider>
+        <SavedProvider>
+          <ThemeProvider>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </SavedProvider>
+      </UserProvider>
     </>
   );
 }

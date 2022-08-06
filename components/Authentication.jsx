@@ -1,16 +1,20 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { MdMovie } from 'react-icons/md';
+import SignInForm from './sign-in-form/SignInForm';
+import SignUpForm from './sign-up-form/SignUpForm';
 
 const Authentication = ({
   loginRoute,
-  setEmail,
-  setPassword,
-  handleSignup,
-  handleLogin,
+  formFieldsSignUp,
+  formFieldsSignIn,
+  handleSignUp,
+  handleSignIn,
+  handleSignUpChange,
+  handleSignInChange,
+  handleSignInWithGoogle,
   error,
 }) => {
-  console.log(error);
   return (
     <div className="w-full h-screen font-light">
       <div className="fixed w-full px-4 py-20 z-50">
@@ -25,81 +29,25 @@ const Authentication = ({
             <h1 className="text-3xl font-light">
               {loginRoute ? 'Login' : 'Sign Up'}
             </h1>
-            {error && (
+            {/* {error && (
               <p className="text-center bg-red-500 p-2 mt-4 mx-10 rounded">
                 {error}
               </p>
-            )}
+            )} */}
             <div className="text-center">
               {loginRoute ? (
-                <form
-                  onSubmit={handleLogin}
-                  className="w-full flex flex-col py-4"
-                >
-                  <input
-                    onChange={e => setEmail(prev => (prev = e.target.value))}
-                    className="py-7 indent-3 bg-transparent"
-                    type="email"
-                    placeholder="Email address"
-                  />
-                  <div className="border-b-2 border-[#5A698F]"></div>
-                  <input
-                    onChange={e => setPassword(prev => (prev = e.target.value))}
-                    className="py-7 indent-3 bg-transparent"
-                    type="password"
-                    placeholder="Password"
-                  />
-                  <div className="border-b-2 border-[#5A698F]"></div>
-                  <button className="bg-[#FC4747] rounded-md py-4 text-lg mb-8 mt-10">
-                    Login to your account
-                  </button>
-                  <p>
-                    Don&apos;t have an account?{' '}
-                    <Link href="/signup">
-                      <span className="text-[#FC4747] cursor-pointer">
-                        Sign Up
-                      </span>
-                    </Link>
-                  </p>
-                </form>
+                <SignInForm
+                  handleSignIn={handleSignIn}
+                  handleSignInChange={handleSignInChange}
+                  formFieldsSignIn={formFieldsSignIn}
+                  handleSignInWithGoogle={handleSignInWithGoogle}
+                />
               ) : (
-                <form
-                  onSubmit={handleSignup}
-                  className="w-full flex flex-col py-4"
-                >
-                  <input
-                    onChange={e => setEmail(prev => (prev = e.target.value))}
-                    className="py-7 indent-3 bg-transparent"
-                    type="email"
-                    placeholder="Email address"
-                  />
-                  <div className="border-b-2 border-[#5A698F]"></div>
-                  <input
-                    onChange={e => setPassword(prev => (prev = e.target.value))}
-                    className="py-7 indent-3 bg-transparent"
-                    type="password"
-                    placeholder="Password"
-                  />
-                  <div className="border-b-2 border-[#5A698F]"></div>
-                  {/* <input
-                    className="py-7 indent-3 bg-transparent"
-                    type="password"
-                    placeholder="Repeat Password"
-                  /> */}
-                  <div className="border-b-2 border-[#5A698F]"></div>
-                  <button className="bg-[#FC4747] rounded-md py-4 text-lg mb-8 mt-10">
-                    Create an account
-                  </button>
-
-                  <p>
-                    Already have an account?{' '}
-                    <Link href="/login">
-                      <span className="text-[#FC4747] cursor-pointer">
-                        Login
-                      </span>
-                    </Link>
-                  </p>
-                </form>
+                <SignUpForm
+                  handleSignUp={handleSignUp}
+                  handleSignUpChange={handleSignUpChange}
+                  formFieldsSignUp={formFieldsSignUp}
+                />
               )}
             </div>
           </div>
