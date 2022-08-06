@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, useContext } from 'react';
 import { viewUserDocs } from '../firebase';
 import { UserContext } from './user.context';
 import axios from 'axios';
+import request from '../MovieRequest';
 
 export const SavedContext = createContext({
   savedMovies: [],
@@ -44,8 +45,6 @@ export const SavedProvider = ({ children }) => {
 
     getSeriesGenres();
   }, []);
-
-  useEffect(() => {}, []);
 
   const value = { savedMovies, savedSeries, movieGenres, seriesGenres };
   return (

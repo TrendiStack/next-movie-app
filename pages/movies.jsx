@@ -1,26 +1,31 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import request from '../MovieRequest';
+import { useContext } from 'react';
 import Navbar from '../components/Navbar';
 import SearchBar from '../components/SearchBar';
-import Recommended from '../components/Recommended';
+
 import MovieSmall from '../components/MovieSmall';
+import { FiSearch } from 'react-icons/fi';
+import { MovieContext } from '../context/movies.context';
 
 const Movies = () => {
-  const [movies, setMovies] = useState([]);
-  useEffect(() => {
-    axios.get(request.requestTopRated).then(res => {
-      setMovies(prev => (prev = res.data.results));
-    });
-  }, []);
+  const { filterTopRated } = useContext(MovieContext);
+
   return (
     <div>
       <Navbar />
-      <SearchBar />
+      <div className="max-w-[450px] mx-auto mt-8">
+        <div className="flex items-center">
+          <div className="mr-4 text-2xl">
+            <FiSearch />
+          </div>
+          <div className="w-full">
+            <SearchBar />
+          </div>
+        </div>
+      </div>
       <div className="max-w-[450px] mx-auto">
         <h1 className="text-3xl my-7">Movies</h1>
         <div className="grid grid-cols-2 gap-x-5">
-          {movies.map((movie, id) => (
+          {filterTopRated.map((movie, id) => (
             <MovieSmall key={id} movie={movie} />
           ))}
         </div>

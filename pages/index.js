@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { FiSearch } from 'react-icons/fi';
 import Navbar from '../components/Navbar';
 import Recommended from '../components/Recommended';
 import SearchBar from '../components/SearchBar';
@@ -14,7 +15,16 @@ export default function Home() {
       </Head>
       <div>
         <Navbar />
-        <SearchBar />
+        <div className="max-w-[450px] mx-auto mt-8">
+          <div className="flex items-center">
+            <div className="mr-4 text-2xl">
+              <FiSearch />
+            </div>
+            <div className="w-full">
+              <SearchBar />
+            </div>
+          </div>
+        </div>
         <Trending />
         <Recommended />
       </div>

@@ -1,22 +1,19 @@
-import React from 'react';
-import { FiSearch } from 'react-icons/fi';
+import React, { useContext } from 'react';
+import { MovieContext } from '../context/movies.context';
 
 const SearchBar = () => {
+  const { setSearchString } = useContext(MovieContext);
+  const onInputChange = event => {
+    const searchField = event.target.value.toLowerCase();
+    setSearchString(searchField);
+  };
   return (
-    <div className="max-w-[450px] mx-auto mt-8">
-      <div className="flex items-center">
-        <div className="mr-4 text-2xl">
-          <FiSearch />
-        </div>
-        <div className="w-full">
-          <input
-            className="w-full bg-transparent text-xl "
-            type="text"
-            placeholder="Search for movies or TV series"
-          />
-        </div>
-      </div>
-    </div>
+    <input
+      className="w-full bg-transparent text-xl "
+      type="text"
+      placeholder="Search for movies or TV series"
+      onChange={onInputChange}
+    />
   );
 };
 
