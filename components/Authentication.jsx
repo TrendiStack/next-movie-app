@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { MdMovie } from 'react-icons/md';
 import SignInForm from './sign-in-form/SignInForm';
 import SignUpForm from './sign-up-form/SignUpForm';
@@ -13,7 +11,6 @@ const Authentication = ({
   handleSignUpChange,
   handleSignInChange,
   handleSignInWithGoogle,
-  error,
 }) => {
   return (
     <div className="w-full h-screen font-light">
@@ -22,7 +19,7 @@ const Authentication = ({
           <MdMovie className="text-[#FC4747] mb-24" size={50} />
         </div>
 
-        <div className="bg-[#161D2F] rounded-md">
+        <div className="bg-[#161D2F] rounded-md sm:mx-[5rem] lg:mx-[10rem] 2xl:mx-[35rem] ">
           <div
             className={`max-w-[400px] mx-auto ${loginRoute ? 'py-12' : 'py-7'}`}
           >

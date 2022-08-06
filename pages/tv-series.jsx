@@ -12,9 +12,9 @@ const Tvseries = () => {
   const { filterSeries } = useContext(MovieContext);
 
   return (
-    <div>
+    <div className="md:ml-24">
       <Navbar />
-      <div className="max-w-[450px] mx-auto mt-8">
+      <div className="max-w-[450px] md:max-w-full mx-auto mt-8">
         <div className="flex items-center">
           <div className="mr-4 text-2xl">
             <FiSearch />
@@ -24,9 +24,9 @@ const Tvseries = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-[450px] mx-auto">
+      <div className="max-w-[450px] md:max-w-full mx-auto">
         <h1 className="text-3xl my-7">TV Series </h1>
-        <div className="grid grid-cols-2 gap-x-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-x-5">
           {filterSeries.map((show, id) => (
             <SeriesSmall key={id} show={show} />
           ))}

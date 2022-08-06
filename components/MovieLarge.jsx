@@ -7,13 +7,14 @@ const Movie = ({ movie }) => {
   return (
     <div>
       <div className="inline-block cursor-pointer relative">
-        <Image
-          className="w-full h-auto block rounded-lg"
-          src={`https://image.tmdb.org/t/p/w500/${movie?.backdrop_path}`}
-          alt="/"
-          width={265}
-          height={155}
-        />
+        <picture>
+          <img
+            className="w-full h-auto block rounded-lg"
+            src={`https://image.tmdb.org/t/p/w500/${movie?.backdrop_path}`}
+            alt="/"
+          />
+        </picture>
+
         <div className="absolute bottom-2 left-2 z-50">
           <p className="text-sm flex items-center gap-x-1">
             {movie?.release_date.substring(0, 4)} •

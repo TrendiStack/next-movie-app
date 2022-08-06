@@ -15,12 +15,28 @@ const Trending = () => {
       setMovies(prev => (prev = res.data.results));
     });
   }, []);
+
+  const breakpoints = {
+    465: {
+      slidesPerView: 1.8,
+      spaceBetween: 20,
+    },
+    768: {
+      slidesPerView: 3,
+      spaceBetween: 10,
+    },
+    1024: {
+      slidesPerView: 6,
+      spaceBetween: 10,
+    },
+  };
   return (
-    <div className="mt-8 max-w-[465px] ml-auto">
+    <div className="mt-8 max-w-[465px] md:max-w-full ml-auto">
       <h1 className="text-3xl my-7">Trending</h1>
       <Swiper
-        spaceBetween={20}
-        slidesPerView={1.8}
+        // spaceBetween={10}
+        // slidesPerView={6}
+        breakpoints={breakpoints}
         freeMode={true}
         modules={[FreeMode]}
       >

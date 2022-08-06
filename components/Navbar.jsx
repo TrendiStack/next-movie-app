@@ -28,27 +28,26 @@ const Navbar = () => {
       await signOutUser();
       setCurrentUser(prev => (prev = null));
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
-  // handleLogOut();
 
   return (
-    <div className="bg-[#161D2F]">
-      <div className="flex items-center w-full max-w-[450px] mx-auto  py-2">
+    <div className="bg-[#161D2F] md:fixed md:bg-[#161D2F] md:top-0 md:bottom-0 md:left-0 md:rounded-lg md:my-3 md:ml-3 z-50">
+      <div className="flex items-center max-w-[450px] mx-auto md:mx-2 md:flex md:flex-col md:items-center md:h-full justify-between">
         <Link href="/">
-          <div>
+          <div className="md:mb-14">
             <MdMovie
-              className="text-[#FC4747] cursor-pointer"
+              className="text-[#FC4747] cursor-pointer hover:text-white transition-all ease-out"
               size={50}
               onClick={() => setActive(prev => (prev = 'home'))}
             />
           </div>
         </Link>
-        <ul className="flex w-full justify-center gap-4 text-lg text-[#5A698F]">
+        <ul className="flex  gap-4 text-lg md:h-full md:flex-col md:text-2xl text-[#5A698F] ">
           <li className="cursor-pointer">
             <Link href="/">
-              <div>
+              <div className="hover:text-[#FC4747] transition-all ease-in">
                 <AiFillAppstore
                   onClick={() => setActive(prev => (prev = 'home'))}
                   className={active === 'home' ? styles.active : ''}
@@ -58,7 +57,7 @@ const Navbar = () => {
           </li>
           <li className="cursor-pointer">
             <Link href="/movies">
-              <div>
+              <div className="hover:text-[#FC4747] transition-all ease-in">
                 <RiFilmFill
                   onClick={() => setActive(prev => (prev = 'movie'))}
                   className={active === 'movie' ? styles.active : ''}
@@ -68,7 +67,7 @@ const Navbar = () => {
           </li>
           <li className="cursor-pointer">
             <Link href="/tv-series">
-              <div>
+              <div className="hover:text-[#FC4747] transition-all ease-in">
                 <RiTvFill
                   onClick={() => setActive(prev => (prev = 'series'))}
                   className={active === 'series' ? styles.active : ''}
@@ -78,10 +77,12 @@ const Navbar = () => {
           </li>
           <li className="cursor-pointer">
             <Link href="/bookmarks">
-              <div>
+              <div className="hover:text-[#FC4747] transition-all ease-in">
                 <FaBookmark
                   onClick={() => setActive(prev => (prev = 'bookmarks'))}
-                  className={active === 'bookmarks' ? styles.active : ''}
+                  className={`${
+                    active === 'bookmarks' ? styles.active : ''
+                  } md:text-xl md:mt-[2px]`}
                 />
               </div>
             </Link>
@@ -91,7 +92,7 @@ const Navbar = () => {
           {currentUser ? (
             <picture onClick={toggleDropDown}>
               <img
-                className="w-[34px] h-[30px] rounded-full border-2  border-white"
+                className="w-[30px] h-[30px] rounded-full border-2 border-white hover:border-[#FC4747] md:mb-5 transition-all ease-in"
                 src={currentUser.photoURL}
                 alt="/"
               />
@@ -104,12 +105,12 @@ const Navbar = () => {
             </Link>
           )}
           {dropdown && (
-            <div className="absolute right-[1px] z-50">
+            <div className="absolute right-[7px] md:bottom-[55px] md:right-[2.5px] z-50">
               <ul className="bg-[#161D2F] text-2xl p-5 rounded-lg">
-                <li className="relative left-1 mb-4 cursor-pointer">
+                <li className="relative mb-4 cursor-pointer hover:text-[#FC4747]">
                   <RiAccountCircleFill />
                 </li>
-                <li className="relative left-[0.4rem] cursor-pointer">
+                <li className="relative left-[3.5px] cursor-pointer hover:text-[#FC4747]">
                   <HiOutlineLogout
                     onClick={() => {
                       handleLogOut();

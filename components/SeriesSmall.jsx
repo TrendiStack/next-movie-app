@@ -31,13 +31,13 @@ const SeriesSmall = ({ show }) => {
   return (
     <div className="pb-5">
       <div className="inline-block cursor-pointer relative">
-        <Image
-          className="w-full h-auto block rounded-lg"
-          src={`https://image.tmdb.org/t/p/w500${show?.backdrop_path}`}
-          alt="/"
-          width={265}
-          height={165}
-        />
+        <picture>
+          <img
+            className="h-auto block rounded-lg"
+            src={`https://image.tmdb.org/t/p/w500${show?.backdrop_path}`}
+            alt="/"
+          />
+        </picture>
         <div
           onClick={saveShow}
           className="flex justify-center items-center absolute top-2 right-2 bg-[#10141E] bg-opacity-[0.5] w-[32px] h-[32px] rounded-full"

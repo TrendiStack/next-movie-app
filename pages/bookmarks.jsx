@@ -16,9 +16,9 @@ const Bookmarks = () => {
     useContext(MovieContext);
 
   return (
-    <div>
+    <div className="md:ml-24">
       <Navbar />
-      <div className="max-w-[450px] mx-auto mt-8">
+      <div className="max-w-[450px] md:max-w-full mx-auto mt-8">
         <div className="flex items-center">
           <div className="mr-4 text-2xl">
             <FiSearch />
@@ -28,9 +28,9 @@ const Bookmarks = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-[450px] mx-auto">
+      <div className="max-w-[450px] md:max-w-full mx-auto">
         <h1 className="text-3xl my-7">Bookmarks</h1>
-        <div className="flex text-2xl justify-between mx-7 mb-9">
+        <div className="flex text-2xl justify-between md:justify-around mx-7 mb-9">
           <h2
             onClick={() => {
               setMoviesTab(prev => (prev = true));
@@ -50,7 +50,7 @@ const Bookmarks = () => {
             TV - Series
           </h2>
         </div>
-        <div className="grid grid-cols-2 gap-x-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-x-5">
           {moviesTab
             ? filterBookmarkMovies.map(movie => (
                 <BookmarkedMovies

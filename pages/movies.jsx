@@ -10,27 +10,29 @@ const Movies = () => {
   const { filterTopRated } = useContext(MovieContext);
 
   return (
-    <div>
+    <>
       <Navbar />
-      <div className="max-w-[450px] mx-auto mt-8">
-        <div className="flex items-center">
-          <div className="mr-4 text-2xl">
-            <FiSearch />
+      <div className="md:ml-24">
+        <div className="max-w-[450px] md:max-w-full mx-auto mt-8">
+          <div className="flex items-center">
+            <div className="mr-4 text-2xl">
+              <FiSearch />
+            </div>
+            <div className="w-full">
+              <SearchBar />
+            </div>
           </div>
-          <div className="w-full">
-            <SearchBar />
+        </div>
+        <div className="max-w-[450px] md:max-w-full mx-auto">
+          <h1 className="text-3xl my-7">Movies</h1>
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-x-5">
+            {filterTopRated.map((movie, id) => (
+              <MovieSmall key={id} movie={movie} />
+            ))}
           </div>
         </div>
       </div>
-      <div className="max-w-[450px] mx-auto">
-        <h1 className="text-3xl my-7">Movies</h1>
-        <div className="grid grid-cols-2 gap-x-5">
-          {filterTopRated.map((movie, id) => (
-            <MovieSmall key={id} movie={movie} />
-          ))}
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 
