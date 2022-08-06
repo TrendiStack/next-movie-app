@@ -28,9 +28,11 @@ export const SavedProvider = ({ children }) => {
 
   useEffect(() => {
     const getSeriesGenres = () => {
-      axios.get('http://localhost:3000/api/movie-genres').then(res => {
-        setMoviesGenres(prev => (prev = res.data));
-      });
+      axios
+        .get('https://next-movie-app-five.vercel.app/api/movie-genres')
+        .then(res => {
+          setMoviesGenres(prev => (prev = res.data));
+        });
     };
 
     getSeriesGenres();
@@ -38,9 +40,11 @@ export const SavedProvider = ({ children }) => {
 
   useEffect(() => {
     const getSeriesGenres = () => {
-      axios.get('http://localhost:3000/api/series-genres').then(res => {
-        setSeriesGenres(prev => (prev = res.data));
-      });
+      axios
+        .get('https://next-movie-app-five.vercel.app/api/series-genres')
+        .then(res => {
+          setSeriesGenres(prev => (prev = res.data));
+        });
     };
 
     getSeriesGenres();
